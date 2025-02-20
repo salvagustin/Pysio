@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+
+{% block title %} | Registro de Usuario {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center">
+        <h1>Agregar usuario</h1>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                       <div class="form-group">
+                            <label>Paciente: </label>
+                            {{ UsuarioForm.paciente }}
+                       </div><br>
+                       <div class="form-group">
+                            <label>Usuario: </label>
+                            {{ UsuarioForm.user }}
+                       </div><br>
+                       <div class="form-group">
+                            <label>Token: </label>
+                            {{ UsuarioForm.token }}
+                       </div><br>
+                       <div class="form-group">
+                            <label>Tipo de usuario: </label>
+                            {{ UsuarioForm.tipousuario }}
+                       </div><br>
+                       
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a class="btn btn-secondary" href="javascript:history.back()">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

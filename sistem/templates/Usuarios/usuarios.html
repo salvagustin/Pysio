@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block title %} | Usuarios {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center">
+        <h1>Usuarios</h1>
+    </div>
+</div>
+<br>
+<div class="container">
+    <a class="btn btn-primary" href="/agregarusuario/">Agregar</a>
+    <br><br>
+    
+    <table class="table table-bordered" >
+        <thead>
+            <th>Numero</th>
+            <th>Nombre</th>
+            <th>Usuario</th>
+            <th>Tipo</th>
+            <th>Acciones</th>
+        </thead>
+        <tbody>
+
+            {% for usuario in entity %}
+                <tr>
+                    <td>{{ usuario.idusuario }}</td>
+                    <td>{{ usuario.paciente.nombre }}</td>
+                    <td>{{ usuario.user}}</td>
+                    <td>{{ usuario.tipousuario}}</td>
+                    <td>
+                        <a class="btn btn-secondary" href="/editarusuario/{{usuario.idusuario}}/">Editar</a>
+                        <a class="btn btn-danger" href="/eliminarusuario/{{usuario.idusuario}}/">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% include "paginacion.html" %}
+</div>
+{% endblock content %}

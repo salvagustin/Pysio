@@ -1,0 +1,63 @@
+{% extends 'index.html' %}
+
+{% block title %} | Citas {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center">
+        <h1>Citas de: {{mes}} </h1>
+    </div>
+</div>
+<h3>Semana: {{semana}} </h3>
+<br>
+<div class="container">
+    <a class="btn btn-primary" href="/agregarcita/">Agregar</a>
+    
+    <br><br>
+    
+    <table class="table table-bordered border-primary">
+        <thead>
+            <th>Hora/Dia</th>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miercoles</th>
+            <th>Jueves</th>
+            <th>Viernes</th>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>
+                        {% for hora in horario %}
+                            <h6>{{ hora }}</h6>
+                        {% endfor %}
+                    </td>
+                    <td>                       
+                        {% for cita in citaslunes %}
+                            {% if cita != 'disponible' %}
+                                <h6>{{cita.paciente.nombre}}</h6>
+                            {% else %}
+                                <h6 style="color: crimson;">{{cita}}</h6>
+                            {% endif %}
+                            
+                        {% endfor %}               
+                    </td>
+                    <td>                       
+                        {% for cita in citasmartes %}
+                            {% if cita != 'disponible' %}
+                                <h6>{{cita.paciente.nombre}}</h6>
+                            {% else %}
+                                <h6 style="color: crimson;">{{cita}}</h6>
+                            {% endif %}
+                            
+                        {% endfor %}               
+                    </td>
+                </tr>
+            
+        </tbody>
+    </table>
+
+
+   
+    <!--{% include "paginacion.html" %}-->
+</div>
+{% endblock content %}

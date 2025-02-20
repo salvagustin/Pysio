@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+
+{% block title %} | Edicion de Paciente {{paciente.nombre}}{% endblock title %}
+{% block extrahead %}
+{{pacienteform.media }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center">
+        <h1>Editar paciente</h1>
+    </div>
+</div>
+<br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                       <div class="form-group">
+                            <label>Nombre</label>
+                            {{pacienteform.nombre}}
+                       </div><br>
+                       <div class="form-group">
+                            <label>Fecha</label>
+                            {{pacienteform.fecha_nacimiento}}
+                       </div><br>
+                       <div class="form-group">
+                            <label>Telefono</label>
+                            {{pacienteform.telefono}}
+                       </div><br>
+                       <div class="form-group">
+                            <label>Sexo</label>
+                            {{pacienteform.sexo}}
+                       </div><br>
+                       
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a class="btn btn-secondary" href="javascript:history.back()">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

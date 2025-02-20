@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+
+{% block title %} | Consultas {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center">
+        <h1>Consultas</h1>
+    </div>
+</div>
+<br>
+<div class="container">
+    <a class="btn btn-primary" href="/agregarconsulta/">Agregar</a>
+    <br><br>
+    <table class="table table-bordered">
+        <thead>
+            <th>Numero</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Paciente</th>
+            <th>Observaciones</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+        </thead>
+        <tbody>
+            {% for consulta in entity %}
+                <tr>
+                    <td>{{ consulta.idconsulta }}</td>
+                    <td>{{ consulta.fechaconsulta }}</td>
+                    <td>{{ consulta.horaconsulta }}</td>
+                    <td>{{ consulta.paciente.nombre}}</td>
+                    <td>{{ consulta.observaciones }}</td>
+                    <td>{{ consulta.precioconsulta }}</td>
+                    <td>
+                        <a class="btn btn-secondary" href="/editarconsulta/{{consulta.idconsulta}}/">Editar</a>
+                        <a class="btn btn-danger" href="/eliminarconsulta/{{consulta.idconsulta}}/">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% include "paginacion.html" %}
+</div>
+{% endblock content %}
