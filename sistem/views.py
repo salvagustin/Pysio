@@ -58,7 +58,7 @@ def ListaCitas(request):
                '01:00 - 02:00','02:00 - 03:00','03:00 - 04:00','04:00 - 05:00',
                '05:00 - 06:00']
     
-    #OBTENER FECHA ACTUAL Y AISLAR SEMANA Y MES ACTUALES
+    #OBTENER FECHA ACTUAL Y FORMATEAR SEMANA Y MES ACTUALES
     horayfecha = datetime.datetime.now()
     semanaactual = horayfecha.isocalendar().week
     fha = horayfecha
@@ -66,44 +66,56 @@ def ListaCitas(request):
 
     
     #FOR QUE CONSULTA LAS CITAS PARA EL DIA LUNES
-    citaslunes = [] 
+    citaslunes = []
     for i in range(1,10):
-        citas_lunes = Cita.objects.filter(horacita=i, fechacita__week=semanaactual)    
+        citas_lunes = Cita.objects.filter(horacita=i, fechacita__week=semanaactual, fechacita__week_day=2)
         if len(citas_lunes) == 0:
-            print('disponible')
             citaslunes.append('disponible')
         else:
-            for lunes in citas_lunes:
-                fecha = lunes.fechacita
-                #semana = fecha.isocalendar().week
-                dia = fecha.isoweekday()
-
-                if dia != 1:
-                    print(dia)
-                    citaslunes.append('disponible')
-                else:
-                    citaslunes.append(lunes)
+            for lunes in citas_lunes:          
+                citaslunes.append(lunes)
                 
-                    
+               
     #FOR QUE CONSULTA LAS CITAS PARA EL DIA MARTES
     citasmartes = [] 
     for i in range(1,10):
-        citas_martes = Cita.objects.filter(horacita=i, fechacita__week=semanaactual)    
+        citas_martes = Cita.objects.filter(horacita=i, fechacita__week=semanaactual, fechacita__week_day=3)    
         if len(citas_martes) == 0:
-            #print(i)
             citasmartes.append('disponible')
         else:
             for martes in citas_martes:
-                fecha = martes.fechacita
-                dia = fecha.isoweekday()
-                
-                if dia != 2:
-                    #print(martes)
-                    citasmartes.append('disponible')
-                else:
-                    citasmartes.append(martes)
-
+                citasmartes.append(martes)
     
+    #FOR QUE CONSULTA LAS CITAS PARA EL DIA MIERCOLES
+    citasmiercoles = [] 
+    for i in range(1,10):
+        citas_miercoles = Cita.objects.filter(horacita=i, fechacita__week=semanaactual, fechacita__week_day=4)    
+        if len(citas_miercoles) == 0:
+            citasmiercoles.append('disponible')
+        else:
+            for miercoles in citas_miercoles:
+                citasmiercoles.append(miercoles)
+
+    #FOR QUE CONSULTA LAS CITAS PARA EL DIA JUEVES
+    citasjueves = [] 
+    for i in range(1,10):
+        citas_jueves = Cita.objects.filter(horacita=i, fechacita__week=semanaactual, fechacita__week_day=5)    
+        if len(citas_jueves) == 0:
+            citasjueves.append('disponible')
+        else:
+            for jueves in citas_jueves:
+                citasjueves.append(jueves)                
+    
+    #FOR QUE CONSULTA LAS CITAS PARA EL DIA VIERNES
+    citasviernes = [] 
+    for i in range(1,10):
+        citas_viernes = Cita.objects.filter(horacita=i, fechacita__week=semanaactual, fechacita__week_day=6)    
+        if len(citas_viernes) == 0:
+            citasviernes.append('disponible')
+        else:
+            for viernes in citas_viernes:
+                citasviernes.append(viernes)
+
     match mesactual:
         case "01" :
             mesactual ="Enero" 
@@ -134,6 +146,9 @@ def ListaCitas(request):
         'horario': horario,
         'citaslunes': citaslunes,
         'citasmartes': citasmartes,
+        'citasmiercoles':citasmiercoles,
+        'citasjueves':citasjueves,
+        'citasviernes':citasviernes,
         'mes':mesactual,
         'semana': semanaactual
     }
@@ -152,6 +167,7 @@ def crear_cita(request):
     if request.method == 'POST':
         form = CitaForm(data=request.POST)
         if form.is_valid():
+            
             form.save()
             return redirect('/citas/')
         else:

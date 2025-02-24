@@ -51,6 +51,36 @@
                             
                         {% endfor %}               
                     </td>
+                    <td>                       
+                        {% for cita in citasmiercoles %}
+                            {% if cita != 'disponible' %}
+                                <h6>{{cita.paciente.nombre}}</h6>
+                            {% else %}
+                                <h6 style="color: crimson;">{{cita}}</h6>
+                            {% endif %}
+                            
+                        {% endfor %}               
+                    </td>
+                    <td>                       
+                        {% for cita in citasjueves %}
+                            {% if cita != 'disponible' %}
+                                <h6>{{cita.paciente.nombre}}</h6>
+                            {% else %}
+                                <h6 style="color: crimson;">{{cita}}</h6>
+                            {% endif %}
+                            
+                        {% endfor %}               
+                    </td>
+                    <td>                       
+                        {% for cita in citasviernes %}
+                            {% if cita != 'disponible' %}
+                                <h6>{{cita.paciente.nombre}}</h6>
+                            {% else %}
+                                <h6 style="color: crimson;">{{cita}}</h6>
+                            {% endif %}
+                            
+                        {% endfor %}               
+                    </td>
                 </tr>
             
         </tbody>
