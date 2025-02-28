@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block title %} | Estadisticas {% endblock title %}
+
+{% block content %}
+<div class="contenedorE">
+  <h2>Datos de {{ mesactual }}</h2>
+  <h3>Citas: {{ citasmes }} </h3>
+  <h3>Consultas: {{ consultasmes }} </h3>
+  <h3>Devengado: ${{ devengadomes }} </h3>
+  
+  
+</div>
+<class class="container">
+  <h3>Total de citas: {{ totalcitas }} </h3>
+  <h3>Consultas: {{ totalconsultas }} </h3>
+  <h3>Pacientes: {{ totalpacientes }} </h3>
+  <h3>Devengado: ${{ totaldevengado }} </h3>
+  <h3>Consultas por Lesion: {{ consultaslesion }} </h3>
+  <h3>Consultas por Patologia: {{ consultaspat }} </h3>
+</class>
+{% endblock content %}

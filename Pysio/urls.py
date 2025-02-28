@@ -24,6 +24,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', home),
     path('home/', home),
+    path('estadisticas/', estadisticas),
     #DIRECCION PACIENTES
     path('pacientes/', ListaPacientes),
     path('agregarpaciente/', crear_paciente),

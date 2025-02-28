@@ -36,6 +36,8 @@ class Consulta(models.Model):
     fechaconsulta = models.DateField('Fecha de consulta', auto_now=True, auto_now_add=False)
     horaconsulta = models.TimeField('Hora consulta', auto_now=True, auto_now_add=False)
     precioconsulta = models.DecimalField('Precio', max_digits=10, decimal_places=2, default=0.0, blank=True)
+    opciones = (("Les", "Lesion"), ("Pat", "Patologia"))
+    tipo =  models.CharField('Tipo', max_length=3, choices=opciones, blank=True, null=True)
     observaciones = models.CharField('Observaciones', max_length=500)
    
     

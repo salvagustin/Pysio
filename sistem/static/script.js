@@ -18,3 +18,5 @@ if (seconds < 10) seconds = "0" + seconds;
 $("#HoraActual").text(day + "/" + month + "/" + year + " " + hours+ ":" +minutes+ ":" +seconds);
 setTimeout("showTime()", 1000);
 }
+
+

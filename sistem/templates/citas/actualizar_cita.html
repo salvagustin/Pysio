@@ -24,10 +24,6 @@
                         {% csrf_token %}
 
                        <div class="form-group">
-                            <label>Numero: </label>
-                            <label >{{ citaform.idcita }} </label>
-                       </div><br>
-                       <div class="form-group">
                             <label>Paciente: </label>
                             {{ citaform.paciente }}
                        </div><br>
@@ -40,7 +36,7 @@
                             {{ citaform.horacita }}
                        </div><br>
                        <div class="form-group">
-                            <label>Hora: </label>
+                            <label>Observaciones: </label>
                             {{ citaform.observaciones }}
                         </div><br>
                    
