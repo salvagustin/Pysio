@@ -1,22 +1,22 @@
-showTime();
-function showTime(){
-myDate = new Date();
-hours = myDate.getHours();
-minutes = myDate.getMinutes();
-seconds = myDate.getSeconds();
-year = myDate.getFullYear();
-month = myDate.getMonth() + 1;
-day = myDate.getDate();
-
-if (month < 10) month = "0" + month;
-if (day < 10) day = "0" + day;
-if (hours < 10) hours = "0" + hours;
-if (minutes < 10) minutes = "0" + minutes;
-if (seconds < 10) seconds = "0" + seconds;
+/* FUNCION QUE CONSULTA LA HORA ACTUAL Y LE DA FORMATO */
 
 
-$("#HoraActual").text(day + "/" + month + "/" + year + " " + hours+ ":" +minutes+ ":" +seconds);
-setTimeout("showTime()", 1000);
-}
 
-
+function eliminarregistro(id,objeto,objeto2){
+ 
+	swal({
+		title: "Estas Seguro de Eliminar el registro con numero: "+ id+" ?",
+		text: "Una vez eliminado el resgistro "+ objeto +":"+objeto2,
+		icon: "warning",
+		buttons: true,
+		dangerMode: false,
+	})
+		.then((OK) => {
+			if (OK) {
+				location.href="/eliminar"+objeto+"/"+id;
+				
+			} else {
+				swal("Su registro No fue Eliminado");
+			}
+		});
+	}

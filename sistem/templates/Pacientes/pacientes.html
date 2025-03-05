@@ -29,7 +29,11 @@
                     <td>{{ paciente.telefono}}</td>
                     <td>
                         <a class="btn btn-secondary" href="/editarpaciente/{{paciente.idpaciente}}/">Editar</a>
-                        <a class="btn btn-danger" href="/eliminarpaciente/{{paciente.idpaciente}}/">Eliminar</a>
+                        <button type="button" class="btn btn-danger" onclick="eliminarregistro(
+                            id = '{{ paciente.idpaciente}}', 
+                            objeto='paciente',
+                            objeto2='{{paciente.nombre}}'
+                            )">Eliminar</button>
                     </td>
                 </tr>
             {% endfor %}

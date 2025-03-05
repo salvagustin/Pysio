@@ -11,10 +11,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
-    
+    <!--SWEET ALERT -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!--Archivos estaticos CSS y JavaScript-->
     <link rel="stylesheet" href="../../static/style.css" >
-    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="/code.jquery.com/jquery.min.js"></script>
+    <script src="{% static 'script.js' %}"></script>
 </head>
 <body>
     <nav>
@@ -31,9 +34,9 @@
         </ul>
         <div class="menu-icon">
             <i class="fa-solid fa-bars" onclick="toggleMenu()"></i>
+            
         </div>
     </nav>
-   
 
     <script>
         let menuList = document.getElementById("menuList")
@@ -53,13 +56,14 @@
      <div class="container">
         <div class="row">
             <div class="col-12">
+                
                 <br/>
                 {% block content %}
                 {% endblock content %}
             </div>
         </div>
    </div>
-    <script src="https://kit.fontawesome.com/f8e1a90484.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../../static/script.js" >
+    <!--<script src="https://kit.fontawesome.com/f8e1a90484.js" crossorigin="anonymous"></script>
+-->     
 </body>
 </html>
