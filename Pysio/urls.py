@@ -21,6 +21,7 @@ from sistem import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('sistem.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', home),
     path('home/', home),

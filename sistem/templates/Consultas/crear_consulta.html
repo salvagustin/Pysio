@@ -1,7 +1,9 @@
 {% extends 'index.html' %}
 
 {% block title %} | Registro de Consulta {% endblock title %}
-
+{% block extrahead %}
+{{ConsultaForm.media }}
+{% endblock %}
 {% block content %}
 <div class="container">
     <div class="text-center">
@@ -10,7 +12,7 @@
 </div>
 <br>
 <br>
-  
+{% load crispy_forms_tags %} 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -22,22 +24,7 @@
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
 
-                        <div class="form-group">
-                            <label>Paciente: </label>
-                            {{ ConsultaForm.paciente }}
-                        </div><br>
-                        <div class="form-group">
-                            <label>Precio: </label>
-                            {{ ConsultaForm.precioconsulta }}
-                        </div><br>
-                        <div class="form-group">
-                            <label>Consulta por: </label>
-                            {{ ConsultaForm.tipo }}
-                        </div><br>
-                        <div class="form-group">
-                            <label>Observaciones: </label>
-                            {{ConsultaForm.observaciones }}
-                        </div><br>
+                        {{ ConsultaForm |crispy}}
                        
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Guardar</button>

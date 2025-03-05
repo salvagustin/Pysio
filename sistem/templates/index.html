@@ -16,7 +16,7 @@
 
     <!--Archivos estaticos CSS y JavaScript-->
     <link rel="stylesheet" href="../../static/style.css" >
-    <script src="/code.jquery.com/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
     <script src="{% static 'script.js' %}"></script>
 </head>
 <body>
@@ -25,11 +25,20 @@
             <a href="/home/" ><img src="../../static/logo.png" height="40" width="40" alt="Botón"</a>
         </div>
         <ul id="menuList">
-            <li><a class="d-block text-light p-3" href="/pacientes/" >Pacientes</a>
+            <li><a class="d-block text-light p-3" href="/pacientes/" >Pacientes</a></li>
             <li><a class="d-block text-light p-3" href="/consultas/">Consultas</a></li>
             <li><a class="d-block text-light p-3" href="">Ejercicios</a></li>
             <li><a class="d-block text-light p-3" href="/citas/">Citas</a></li>
             <li><a class="d-block text-light p-3" href="/estadisticas/">Estadisticas</a></li>
+
+            {% if user.is_authenticated %}
+
+                <li><a href="{% url 'logout' %}">Cerrar sesion</a></li>
+                <li><a href="#">@{{user.username}}</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Iniciar sesion</a></li>
+            
+            {% endif %}
             
         </ul>
         <div class="menu-icon">

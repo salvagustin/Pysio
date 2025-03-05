@@ -13,6 +13,7 @@
     </div>
 </div>
 <br>
+{% load crispy_forms_tags %}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -24,22 +25,7 @@
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
 
-                        <div class="form-group">
-                            <label>Paciente: </label>
-                            {{ CitaForm.paciente }}
-                        </div><br>
-                        <div class="form-group">
-                            <label>Fecha: </label>
-                            {{ CitaForm.fechacita }}
-                        </div><br>
-                        <div class="form-group">
-                            <label>Hora: </label>
-                            {{ CitaForm.horacita }}
-                        </div><br>
-                        <div class="form-group">
-                            <label>Observaciones: </label>
-                            {{ CitaForm.observaciones }}
-                        </div><br>
+                        {{ CitaForm |crispy}}
                        
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Guardar</button>

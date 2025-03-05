@@ -5,8 +5,8 @@
 function eliminarregistro(id,objeto,objeto2){
  
 	swal({
-		title: "Estas Seguro de Eliminar el registro con numero: "+ id+" ?",
-		text: "Una vez eliminado el resgistro "+ objeto +":"+objeto2,
+		title: "Eliminar registro numero: "+ id+" ?",
+		text: objeto +": "+objeto2,
 		icon: "warning",
 		buttons: true,
 		dangerMode: false,

@@ -1,6 +1,9 @@
 {% extends 'index.html' %}
 
 {% block title %} | Edicion de Consulta {{consulta.paciente.nombre}}{% endblock title %}
+{% block extrahead %}
+{{consultaform.media }}
+{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -10,6 +13,7 @@
 </div>
 <br>
 <br>
+{% load crispy_forms_tags %}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -20,20 +24,8 @@
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-
-                       <div class="form-group">
-                            <label>Paciente: </label>
-                            {{ consultaform.paciente }}
-                       </div><br>
-                       <div class="form-group">
-                            <label>Precio: </label>
-                            {{ consultaform.precioconsulta }}
-                       </div><br>
-                       <div class="form-group">
-                            <label>Observaciones: </label>
-                            {{consultaform.observaciones }}
-                       </div><br>
-                       
+                        
+                        {{ consultaform |crispy}}
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Guardar</button>
                             <a class="btn btn-secondary" href="javascript:history.back()">Cancelar</a>

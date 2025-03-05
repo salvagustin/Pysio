@@ -14,7 +14,7 @@
     </div>
 </div>
 <br>
-  
+{% load crispy_forms_tags %}  
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -26,22 +26,7 @@
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
 
-                       <div class="form-group">
-                            <label>Nombre</label>
-                            {{PacienteForm.nombre}}
-                       </div><br>
-                       <div class="form-group">
-                            <label>Fecha</label>
-                            {{PacienteForm.fecha_nacimiento}}
-                        </div><br>
-                       <div class="form-group">
-                            <label>Telefono</label>
-                            {{PacienteForm.telefono}}
-                        </div><br>
-                       <div class="form-group">
-                            <label>Sexo</label>
-                            {{PacienteForm.sexo}}
-                        </div><br>
+                        {{ PacienteForm |crispy}}
                        
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Guardar</button>

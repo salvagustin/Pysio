@@ -2,7 +2,7 @@
 
 {% block title %} | Registro de Cita {% endblock title %}
 {% block extrahead %}
-{{pacienteform.media }}
+{{citaform.media }}
 {% endblock %}
 
 {% block content %}
@@ -12,6 +12,7 @@
     </div>
 </div>
 <br>
+{% load crispy_forms_tags %}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -23,27 +24,16 @@
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
 
-                       <div class="form-group">
-                            <label>Paciente: </label>
-                            {{ citaform.paciente }}
-                       </div><br>
-                       <div class="form-group">
-                            <label>Fecha </label>
-                            {{ citaform.fechacita }}
-                       </div><br>
-                       <div class="form-group">
-                            <label>Hora: </label>
-                            {{ citaform.horacita }}
-                       </div><br>
-                       <div class="form-group">
-                            <label>Observaciones: </label>
-                            {{ citaform.observaciones }}
-                        </div><br>
-                   
+                        {{ citaform |crispy}}
                        
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Guardar</button>
                             <a class="btn btn-secondary" href="javascript:history.back()">Cancelar</a>
+                            <button type="button" class="btn btn-danger" onclick="eliminarregistro(
+                                id = '{{ cita.idcita}}', 
+                                objeto='cita',
+                                objeto2='{{cita.fechacita}}'
+                                )">Eliminar</button>
                         </div>
                     </form>
                 </div>

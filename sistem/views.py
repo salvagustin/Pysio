@@ -48,11 +48,13 @@ match mesactualnumero:
 def home(request):
     return render(request, 'index.html' )
 
+@login_required
 def salir(request):
     logout(request)
     return redirect('login.html')
 
 #################### ESTADISTICAS ###################################
+@login_required
 def estadisticas(request):
 
     
@@ -86,6 +88,7 @@ def estadisticas(request):
 ########################### CITAS ##############################################
 
 #VISTA PARA LISTAR CITAS
+@login_required
 def ListaCitas(request):
 
     
@@ -259,6 +262,7 @@ def ListaCitas(request):
     return render(request, 'Citas/citas.html',data)
 
 #VISTA PARA AGREGAR CITA
+@login_required
 def crear_cita(request):
     if request.method == 'GET':
         return render(
@@ -294,6 +298,7 @@ def crear_cita(request):
             )
 
 #VISTA EDITAR CITA
+@login_required
 def editar_cita(request, pk=None):
     cita = Cita.objects.get(pk=pk)
 
@@ -328,6 +333,7 @@ def editar_cita(request, pk=None):
         )
 
 #VISTA ELIMINAR CITAS
+@login_required
 def eliminar_cita(request, pk=None):
     Cita.objects.filter(pk=pk).delete()
     return redirect('/citas/')
@@ -336,6 +342,7 @@ def eliminar_cita(request, pk=None):
 ########################## PACIENTES ################################################
 
 #VISTA LISTAR PACIENTES
+@login_required
 def ListaPacientes(request):
     pacientes = Paciente.objects.all().order_by('-idpaciente')
     pagina = request.GET.get("page", 1)
@@ -354,6 +361,7 @@ def ListaPacientes(request):
     return render(request, 'Pacientes/pacientes.html',data )
 
 #VISTA CREAR PACIENTE
+@login_required
 def crear_paciente(request):
     if request.method == 'GET':
         return render(
@@ -375,6 +383,7 @@ def crear_paciente(request):
             )
 
 #VISTA EDITAR PACIENTE
+@login_required
 def editar_paciente(request, pk=None):
     paciente = Paciente.objects.get(pk=pk)
 
@@ -409,6 +418,7 @@ def editar_paciente(request, pk=None):
         )
 
 #VISTA ELIMINAR PACIENTE
+@login_required
 def eliminar_paciente(request, pk=None):
     Paciente.objects.filter(pk=pk).delete()
     return redirect('/pacientes/')
@@ -417,6 +427,7 @@ def eliminar_paciente(request, pk=None):
 ########################### CONSULTAS ###############################################
 
 #VISTA PARA LISTAR CONSULTAS
+@login_required
 def ListaConsultas(request):
     consultas = Consulta.objects.all().order_by('-idconsulta')
     pagina = request.GET.get("page", 1)
@@ -434,6 +445,7 @@ def ListaConsultas(request):
     return render(request,  'Consultas/consultas.html',data )
 
 #VISTA PARA AGREGAR CONSULTAS
+@login_required
 def crear_consulta(request):
     if request.method == 'GET':
         return render(
@@ -455,6 +467,7 @@ def crear_consulta(request):
             )
 
 #VISTA EDITAR COSULTAS
+@login_required
 def editar_consulta(request, pk=None):
     consulta = Consulta.objects.get(pk=pk)
 
@@ -489,6 +502,7 @@ def editar_consulta(request, pk=None):
         )
 
 #VISTA ELIMINAR CONSULTAS
+@login_required
 def eliminar_consulta(request, pk=None):
     Consulta.objects.filter(pk=pk).delete()
     return redirect('/consultas/')
