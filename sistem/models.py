@@ -62,6 +62,6 @@ class Cita(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, blank=False, null=False)
     fechacita = models.DateField('Fecha de cita')
     opciones = (("1", "8:00 - 9:00"), ("2", "9:00 - 10:00"),("3", "10:00 - 11:00"),("4", "11:00 - 12:00"),
-                ("5", "01:00 - 02:00"),("6", "02:00 - 03:00"),("7", "03:00 - 04:00"),("8", "04:00 - 05:00"),("9", "05:00 - 06:00"),)
+                ("5", "01:00 - 02:00"),("6", "02:00 - 03:00"),("7", "03:00 - 04:00"),("8", "04:00 - 05:00"),("9", "05:00 - 06:00"))
     horacita =  models.CharField('Hora cita', max_length=11, choices=opciones, blank=True, null=True)
     observaciones = models.CharField('Observaciones', max_length=500)

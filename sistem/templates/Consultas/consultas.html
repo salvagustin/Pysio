@@ -7,11 +7,18 @@
     <div class="text-center">
         <h1>Consultas</h1>
 </div>
-<br>
-<div class="container">
-    <a class="btn btn-primary" href="/agregarconsulta/">Agregar</a>
-    <br><br>
-    <table class="table table-bordered">
+<div class="container1">
+    <div class="container2">   
+        <a class="btn btn-primary" href="/agregarconsulta/">Agregar</a>
+    </div>
+    <div class="container2">
+        <h3>Buscar:</h3>
+        <input type="search" id="search">
+        <h3> </h3>
+        <button type="button" class="btn btn-success" onclick="buscarconsulta( )">Buscar</button>
+    </div>
+</div>
+    <table class="table table-bordered border-primary">
         <thead>
             <th>Numero</th>
             <th>Fecha</th>
@@ -23,20 +30,21 @@
         </thead>
         <tbody>
             {% for consulta in entity %}
-                <tr>
-                    <td>{{ consulta.idconsulta }}</td>
-                    <td>{{ consulta.fechaconsulta }}</td>
-                    <td>{{ consulta.horaconsulta }}</td>
-                    <td>{{ consulta.paciente.nombre}}</td>
-                    <td>{{ consulta.observaciones }}</td>
-                    <td>{{ consulta.precioconsulta }}</td>
-                    <td>
+                <tr class="trconsulta">
+                    <td class="tdconsultaid">{{ consulta.idconsulta }}</td>
+                    <td class="tdconsulta">{{ consulta.fechaconsulta }}</td>
+                    <td class="tdconsulta">{{ consulta.horaconsulta }}</td>
+                    <td class="tdconsulta">{{ consulta.paciente.nombre}}</td>
+                    <td class="tdconsultaobrservaciones">{{ consulta.observaciones }}</td>
+                    <td class="tdconsulta">{{ consulta.precioconsulta }}</td>
+                    <td class="tdconsultaedit">
                         <a class="btn btn-secondary" href="/editarconsulta/{{consulta.idconsulta}}/">Editar</a>
+                       
                         <button type="button" class="btn btn-danger" onclick="eliminarregistro(
                             id = '{{ consulta.idconsulta}}', 
                             objeto='consulta',
                             objeto2='{{consulta.fechaconsulta}}'
-                            )">Eliminar</button>
+                            )">Eliminar</a>
 
                     </td>
                 </tr>

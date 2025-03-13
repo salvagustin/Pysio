@@ -3,20 +3,56 @@
 {% block title %} | Estadisticas {% endblock title %}
 
 {% block content %}
+<br>
+<div class="text-center">
+  <h1>Estadisticas</h1>
+</div>
+<br>
+<nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+      <a class="btn btn-primary" href="/agregarpaciente/">Agregar</a>
+    <form class="d-flex" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="conteiner_esta_1">
+  <div class="conteiner_estad_3">
+    <div class="conteiner_estad_2">
+      <h2>Datos del Mes</h2>
+      <h3>Mes:{{ mesactual }}</h3>
+      <h3>Citas: {{ citasmes }} </h3>
+      <h3>Consultas: {{ consultasmes }} </h3>
+      <h3>Devengado: ${{ devengadomes }} </h3>
+  </div>
+  <div class="conteiner_estad_2">
+    <h2>Datos del Mes</h2>
+    <h3>Mes:{{ mesactual }}</h3>
+  </div>
+</div>
+<div class="conteiner_estad_3">
+  <div class="conteiner_estad_2">
+    <h2>Datos del Mes</h2>
+    <h3>Mes:{{ mesactual }}</h3>
+  </div>
+  <div class="conteiner_estad_2">
+    <h3>Total de citas: {{ totalcitas }} </h3>
+    <h3>Consultas: {{ totalconsultas }} </h3>
+    <h3>Pacientes: {{ totalpacientes }} </h3>
+    <h3>Devengado: ${{ totaldevengado }} </h3>
+    <h3>Consultas por Lesion: {{ consultaslesion }} </h3>
+    <h3>Consultas por Patologia: {{ consultaspat }} </h3>
+  </div>
+</div>
+</div>
 <div class="contenedorE">
-  <h2>Datos de {{ mesactual }}</h2>
-  <h3>Citas: {{ citasmes }} </h3>
-  <h3>Consultas: {{ consultasmes }} </h3>
-  <h3>Devengado: ${{ devengadomes }} </h3>
+ 
   
   
 </div>
 <class class="container">
-  <h3>Total de citas: {{ totalcitas }} </h3>
-  <h3>Consultas: {{ totalconsultas }} </h3>
-  <h3>Pacientes: {{ totalpacientes }} </h3>
-  <h3>Devengado: ${{ totaldevengado }} </h3>
-  <h3>Consultas por Lesion: {{ consultaslesion }} </h3>
-  <h3>Consultas por Patologia: {{ consultaspat }} </h3>
+  
 </class>
 {% endblock content %}

@@ -1,6 +1,4 @@
-/* FUNCION QUE CONSULTA LA HORA ACTUAL Y LE DA FORMATO */
-
-
+/* FUNCION PARA ELIMINAR REGISTROS */
 
 function eliminarregistro(id,objeto,objeto2){
  
@@ -20,3 +18,11 @@ function eliminarregistro(id,objeto,objeto2){
 			}
 		});
 	}
+
+function buscarsemana(){
+	const week = document.getElementsByName('week')[0].value;
+	numano = week.substr(0,4)
+	numse = week.substr(6,2)
+	//swal(numano+numse)
+	location.href = "/buscarsemana/"+ numano + "/"+ numse
+}

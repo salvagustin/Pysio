@@ -27,7 +27,7 @@
 
                         {{ CitaForm |crispy}}
                        
-                        <div class="d-grid gap-2">
+                        <div class="container1">
                             <button type="submit" class="btn btn-primary">Guardar</button>
                             <a class="btn btn-secondary" href="javascript:history.back()">Cancelar</a>
                         </div>
@@ -37,4 +37,9 @@
         </div>
     </div>
 </div>
+{% if mensaje == 1 %}
+<script>
+    swal("Este horario esta ocupado");
+</script>
+{% endif %}
 {% endblock content %}

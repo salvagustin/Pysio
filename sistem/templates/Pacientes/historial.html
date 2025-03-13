@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+
+{% block title %} | Historial {% endblock title %}
+
+{% block content %}
+
+<div class="text-center">
+    <h1>Historial</h1>
+</div>
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <h3>Nombre: {{nombre}} </h3>
+        <h3>Total: {{conteo}} </h3>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+</nav>
+    <table class="table table-bordered border-primary">
+        <thead>
+            <th>Numero</th>
+            <th>Fecha</th>
+            <th>Tipo</th>
+            <th>Observaciones</th>
+        </thead>
+        <tbody>
+            {% for consulta in entity %}
+                <tr class="trconsulta">
+                    <td class="tdconsulta">{{ consulta.idconsulta }}</td>
+                    <td class="tdconsulta">{{ consulta.fechaconsulta }}</td>
+                    <td class="tdconsulta">{{ consulta.tipo }}</td>
+                    <td class="tdconsultaobrservaciones">{{ consulta.observaciones }}</td>
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% include "paginacion.html" %}
+
+{% endblock content %}
