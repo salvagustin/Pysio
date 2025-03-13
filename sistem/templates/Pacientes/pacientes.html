@@ -3,7 +3,6 @@
 {% block title %} | Pacientes {% endblock title %}
 
 {% block content %}
-
 <div class="text-center">
     <h1>Pacientes</h1>
 </div>
@@ -19,18 +18,18 @@
 
     <table class="table table-bordered border-primary">
         <thead>
-            <th>Nombre</th>
-            <th>Fecha Nacimiento</th>
+            <th style="width: 500px;" >Nombre</th>
+            <th style="text-align: center;">Fecha Nacimiento</th>
             <th>Telefono</th>
-            <th>Opciones</th>
+            <th style="text-align: center;">Opciones</th>
         </thead>
         <tbody>
             {% for paciente in entity %}
                 <tr>
                     <td>{{ paciente.nombre }}</td>
-                    <td>{{ paciente.fecha_nacimiento }}</td>
+                    <td style="text-align: center;">{{ paciente.fecha_nacimiento }}</td>
                     <td>{{ paciente.telefono}}</td>
-                    <td>
+                    <td class="centrado2">
                         <a class="btn btn-secondary" href="/editarpaciente/{{paciente.idpaciente}}/">Editar</a>
                         <button type="button" class="btn btn-danger" onclick="eliminarregistro(
                             id = '{{ paciente.idpaciente}}', 

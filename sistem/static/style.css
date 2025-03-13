@@ -209,8 +209,11 @@ body {
 
 }
 
-
-
+/*DISENO PARA PACIENTES*/
+.centrado2{
+  display: flex;
+  justify-content: space-evenly;
+}
 
 
 
@@ -236,7 +239,7 @@ body {
 }
 
 
-/*DISENO DE TABLA CONSULTAS*/
+/*DISENO DE TABLA HISTORIAL*/
 .tdconsultaobrservaciones{
   height:10px ;
   max-width: 100px;
@@ -244,8 +247,8 @@ body {
   white-space:nowrap;
   overflow: hidden;
 }
-.tdconsultaid{
-  max-width: 10px;
+.centrar_texto{
+  text-align: center;
 }
 
 .container_resumen_datoscitas{
@@ -255,7 +258,6 @@ body {
 
 .container_resumen_datoscitas2{
   display: flex;
-  
   justify-content: left;
 }
 
@@ -270,13 +272,13 @@ body {
 }
 
 .tdcitas{
-  height: 70px;
+  height: 65px;
   width: 200px;
   text-overflow: ellipsis;
   white-space:initial;
   overflow: hidden;
   text-align: center;
-  
+  padding: 0px;
 }
 
 

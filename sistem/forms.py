@@ -4,21 +4,15 @@ from sistem.models import *
 
 class DateInput(forms.DateInput):
     input_type = 'date'
-    
+
+
 class PacienteForm(forms.ModelForm):
 
     class Meta:
         model = Paciente
-        fields = '__all__'
-        widgets = {
-            'fecha_nacimiento':DateInput(
-                attrs= {
-                     'class':'form-control',
-                    'placeholder':'AÑO/MES/DIA'
-                }
-            )
-        }
-        
+        fields = '__all__'       
+        widgets = {'fecha_nacimiento':DateInput()}
+
 class ConsultaForm(forms.ModelForm):
 
     class Meta:
@@ -38,8 +32,4 @@ class CitaForm(forms.ModelForm):
         widgets = {
             'fechacita':DateInput(
                 attrs= {
-                     'class':'form-control',
-                    'placeholder':'MES/DIA/AÑO'
-                }
-            )
-        }
+                     'class':'form-control'})}

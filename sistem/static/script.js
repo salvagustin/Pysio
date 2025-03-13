@@ -21,8 +21,16 @@ function eliminarregistro(id,objeto,objeto2){
 
 function buscarsemana(){
 	const week = document.getElementsByName('week')[0].value;
-	numano = week.substr(0,4)
-	numse = week.substr(6,2)
-	//swal(numano+numse)
-	location.href = "/buscarsemana/"+ numano + "/"+ numse
+	var exp = /^[W]{1}[K]{1}\d{2}-\d{4}$/
+	if( week == null || week.length == 0 || exp.test(week) ) {
+		swal({
+			title: "!Campo vacio!",
+			text: "Seleccione una semana",
+			timer: 2000,
+			showConfirmButton: false});
+	}else{
+		numano = week.substr(0,4)
+		numse = week.substr(6,2)
+		location.href = "/buscarsemana/"+ numano + "/"+ numse
+	}	
 }

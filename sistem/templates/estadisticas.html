@@ -10,40 +10,40 @@
 <br>
 <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
-      <a class="btn btn-primary" href="/agregarpaciente/">Agregar</a>
-    <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+     
   </div>
 </nav>
 
 <div class="conteiner_esta_1">
   <div class="conteiner_estad_3">
     <div class="conteiner_estad_2">
-      <h2>Datos del Mes</h2>
-      <h3>Mes:{{ mesactual }}</h3>
-      <h3>Citas: {{ citasmes }} </h3>
-      <h3>Consultas: {{ consultasmes }} </h3>
-      <h3>Devengado: ${{ devengadomes }} </h3>
+      <h2>Datos por mes</h2>
+      <h4>Mes:{{ mesactual }}</h4>
+      <h4>Citas: {{ citasmes }} </h4>
+      <h4>Consultas: {{ consultasmes }} </h4>
+      <h4>Devengado: ${{ devengadomes }} </h4>
   </div>
   <div class="conteiner_estad_2">
-    <h2>Datos del Mes</h2>
-    <h3>Mes:{{ mesactual }}</h3>
+    <h2>Datos por año</h2>
+    <h4>Año:{{ year }}</h4>
+    <h4>Citas: {{ citasanio }} </h4>
+    <h4>Consultas: {{ consultasanio}} </h4>
+    <h4>Devengado: ${{ devengadoanio}} </h4>
   </div>
 </div>
 <div class="conteiner_estad_3">
   <div class="conteiner_estad_2">
-    <h2>Datos del Mes</h2>
-    <h3>Mes:{{ mesactual }}</h3>
+    <h2>Datos Ramdom</h2>
+    <h4>Ramdom</h3>
   </div>
   <div class="conteiner_estad_2">
-    <h3>Total de citas: {{ totalcitas }} </h3>
-    <h3>Consultas: {{ totalconsultas }} </h3>
-    <h3>Pacientes: {{ totalpacientes }} </h3>
-    <h3>Devengado: ${{ totaldevengado }} </h3>
-    <h3>Consultas por Lesion: {{ consultaslesion }} </h3>
-    <h3>Consultas por Patologia: {{ consultaspat }} </h3>
+    <h2>Conteo General</h2>
+    <h4>Total de citas: {{ totalcitas }} </h2>
+    <h4>Consultas: {{ totalconsultas }} </h4>
+    <h4>Pacientes: {{ totalpacientes }} </h4>
+    <h4>Devengado: ${{ totaldevengado }} </h4>
+    <h4>Consultas por Lesion: {{ consultaslesion }} </h4>
+    <h4>Consultas por Patologia: {{ consultaspat }} </h4>
   </div>
 </div>
 </div>

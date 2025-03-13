@@ -79,11 +79,14 @@ def estadisticas(request):
     citasmes = Cita.objects.filter(fechacita__month=mesactualnumero).count()
     consultasmes = Consulta.objects.filter(fechaconsulta__month =mesactualnumero).count()
     devengadomes = Consulta.objects.filter(fechaconsulta__month =mesactualnumero).aggregate(Sum('precioconsulta')).get('precioconsulta__sum')
+    citasanio = Cita.objects.filter(fechacita__year=anoactual).count()
+    consultasanio = Consulta.objects.filter(fechaconsulta__year =anoactual).count()
+    devengadoanio = Consulta.objects.filter(fechaconsulta__year =anoactual).aggregate(Sum('precioconsulta')).get('precioconsulta__sum')
 
     totalpacientes = Paciente.objects.count()
-    consultasles = Consulta.objects.filter(tipo = "Les", fechaconsulta__year=anoactual).count()
-    consultaspat = Consulta.objects.filter(tipo = "Pat", fechaconsulta__year=anoactual).count()
-    totaldevengado = Consulta.objects.filter(fechaconsulta__year=anoactual).aggregate(Sum('precioconsulta')).get('precioconsulta__sum')
+    consultasles = Consulta.objects.filter(tipo = "Lesion", ).count()
+    consultaspat = Consulta.objects.filter(tipo = "Patologia", fechaconsulta__year=anoactual).count()
+    totaldevengado = Consulta.objects.all().aggregate(Sum('precioconsulta')).get('precioconsulta__sum')
     totalcitas = Cita.objects.count()
     totalconsultas = Consulta.objects.count()
     mes = nombre_mes(lunes.strftime("%m").capitalize())
@@ -92,7 +95,9 @@ def estadisticas(request):
         'consultasmes': consultasmes,
         'mesactual': mes,
         'citasmes': citasmes,
-
+        'citasanio':citasanio,
+        'consultasanio':consultasanio,
+        'devengadoanio':devengadoanio,
         'totalcitas': totalcitas,
         'totalpacientes': totalpacientes,
         'consultaslesion': consultasles,
@@ -396,7 +401,6 @@ def crear_cita(request):
         if form.is_valid():
             #CONSULTA LA INFORMACION DEL FORM
             fecha = form.cleaned_data['fechacita']
-            dia = fecha.isoweekday()
             hora = form.cleaned_data['horacita']
             #CONSULTA SI EXISTE LA CITA EN LA BASE
             cita = Cita.objects.filter(horacita=hora, fechacita=fecha)
@@ -408,7 +412,6 @@ def crear_cita(request):
                 }
                 return render(request, 'Citas/crear_cita.html', data)
             else:
-                print('Cita creada')
                 form.save()
                 return redirect('/citas/')
         else:
@@ -480,7 +483,7 @@ def eliminar_cita(request, pk=None):
 #VISTA LISTAR PACIENTES
 @login_required
 def ListaPacientes(request):
-    pacientes = Paciente.objects.all().order_by('-idpaciente')
+    pacientes = Paciente.objects.all().order_by('nombre')
     pagina = request.GET.get("page", 1)
 
     try:
@@ -559,11 +562,11 @@ def eliminar_paciente(request, pk=None):
     Paciente.objects.filter(pk=pk).delete()
     return redirect('/pacientes/')
 
-
+#VISTA PARA MOSTRAR EL HISTORIAL DEL PACIENTE
 def paciente_historial(request,pk=None):
     conteo = Consulta.objects.filter(paciente__idpaciente=pk).count()
     paciente = Paciente.objects.get(pk=pk)
-    consultas = Consulta.objects.filter(paciente__idpaciente=pk)
+    consultas = Consulta.objects.filter(paciente__idpaciente=pk).order_by('-fechaconsulta')
     pagina = request.GET.get("page", 1)
     try:
         paginator = Paginator(consultas, 10)

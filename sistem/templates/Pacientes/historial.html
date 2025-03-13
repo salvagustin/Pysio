@@ -19,17 +19,17 @@
 </nav>
     <table class="table table-bordered border-primary">
         <thead>
-            <th>Numero</th>
-            <th>Fecha</th>
-            <th>Tipo</th>
-            <th>Observaciones</th>
+            <th class="centrar_texto">Numero</th>
+            <th class="centrar_texto">Fecha</th>
+            <th class="centrar_texto" >Tipo</th>
+            <th class="centrar_texto">Observaciones</th>
         </thead>
         <tbody>
             {% for consulta in entity %}
-                <tr class="trconsulta">
-                    <td class="tdconsulta">{{ consulta.idconsulta }}</td>
-                    <td class="tdconsulta">{{ consulta.fechaconsulta }}</td>
-                    <td class="tdconsulta">{{ consulta.tipo }}</td>
+                <tr>
+                    <td class="centrar_texto">{{ consulta.idconsulta }}</td>
+                    <td class="centrar_texto">{{ consulta.fechaconsulta }}</td>
+                    <td class="centrar_texto">{{ consulta.tipo }}</td>
                     <td class="tdconsultaobrservaciones">{{ consulta.observaciones }}</td>
                     
                 </tr>
