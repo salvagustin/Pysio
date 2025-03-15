@@ -8,23 +8,20 @@
         <h1>Citas de: {{mes}} </h1>
     </div>
 </div>
-
-<div class="container1">
-    <div class="container2">
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
         <a class="btn btn-primary" href="/agregarcita/">Agregar</a>
-    </div>
-    <div class="container2">
         <h3>Semana: {{semana}} </h3>
-    </div>
-    <div class="container2">
         <h3>Citas: {{ conteocitas }}</h3>
-    </div>
-    <div class="container2">
-        <h4>Buscar: </h4>
+      <div class="d-flex" >
         <input type="week" name="week">
-        <button type="button" class="btn btn-info" onclick="buscarsemana()">Search</button>
+        <button class="btn btn-outline-success"  onclick="buscarsemana()">Search</button>
+      </div>
     </div>
-</div> 
+  </nav>
+
+
+
     <table class="table table-bordered tablacita">
         <thead>
             <th>Hora/Dia</th>
@@ -164,7 +161,7 @@
         </tbody>
         
     </table>
- 
+
    
     <!--{% include "paginacion.html" %}-->
 

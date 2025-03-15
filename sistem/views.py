@@ -4,7 +4,7 @@ from sistem.models import *
 from sistem.forms import *
 from django.views.generic import ListView
 from django.core.paginator import Paginator
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.db.models import Sum
@@ -250,6 +250,7 @@ def ListaCitas(request):
 
 
 #FUNCION PARA OBTENER LAS CITAS DE LA SEMANA BUSCADA
+@login_required
 def buscar_semana(request, numano=None,numse=None):
     ####### SEMANA BUSCADA #########
     
@@ -457,8 +458,7 @@ def editar_cita(request, pk=None):
                 }
                 return render(request, 'Citas/actualizar_cita.html', data)
             else:
-                print('Cita creada')
-            citaform.save()
+                citaform.save()
             return redirect('/citas/')
         else:
             citaform=CitaForm(
@@ -477,7 +477,7 @@ def eliminar_cita(request, pk=None):
     Cita.objects.filter(pk=pk).delete()
     return redirect('/citas/')
 
-
+    
 ########################## PACIENTES ################################################
 
 #VISTA LISTAR PACIENTES
@@ -512,7 +512,10 @@ def crear_paciente(request):
         form = PacienteForm(data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/pacientes/')
+            data={
+                'mensaje': 2
+            }
+            return redirect('/pacientes/',data)
         else:
             form = PacienteForm(data=request.POST)
             return render(
@@ -582,6 +585,44 @@ def paciente_historial(request,pk=None):
     }
     print(nombre)
     return render(request,'Pacientes/historial.html/',data)
+
+#VISTA PARA BUSCAR PACIENTES
+@login_required
+def buscar_paciente(request, name):
+    allpacientes = Paciente.objects.all().order_by('nombre')
+    pacientes = Paciente.objects.filter(nombre__icontains=name).order_by('nombre')
+    if len(pacientes) >= 1:
+                pagina = request.GET.get("page", 1)
+
+                try:
+                    paginator = Paginator(pacientes, 10)
+                    pacientes = paginator.page(pagina)
+                except:
+                    raise Http404
+
+                data = {
+                    'entity': pacientes,
+                    'paginator':paginator
+
+                }
+            
+                return render(request, 'Pacientes/pacientes.html', data)
+    else:
+        existe = 1
+        pagina = request.GET.get("page", 1)
+
+        try:
+            paginator = Paginator(allpacientes, 10)
+            allpacientes = paginator.page(pagina)
+        except:
+            raise Http404
+
+    data = {
+        'entity': allpacientes,
+        'paginator':paginator,
+        'mensaje': existe,
+        }    
+    return render(request, 'Pacientes/pacientes.html', data)
 
 ########################### CONSULTAS ###############################################
 
@@ -666,7 +707,42 @@ def eliminar_consulta(request, pk=None):
     Consulta.objects.filter(pk=pk).delete()
     return redirect('/consultas/')
 
+#VISTA PARA BUSCAR CONSULTA
+def buscar_consulta(request, name=None):
+    allconsultas = Consulta.objects.all().order_by('fechaconsulta')
+    consultas = Consulta.objects.filter(paciente__nombre__icontains=name)
+    if len(consultas) >= 1:
+                pagina = request.GET.get("page", 1)
 
+                try:
+                    paginator = Paginator(consultas, 10)
+                    consultas = paginator.page(pagina)
+                except:
+                    raise Http404
+
+                data = {
+                    'entity': consultas,
+                    'paginator':paginator
+
+                }
+            
+                return render(request, 'Consultas/consultas.html', data)
+    else:
+        existe = 1
+        pagina = request.GET.get("page", 1)
+
+        try:
+            paginator = Paginator(allconsultas, 10)
+            allconsultas = paginator.page(pagina)
+        except:
+            raise Http404
+
+    data = {
+        'entity': allconsultas,
+        'paginator':paginator,
+        'mensaje': existe,
+        }    
+    return render(request, 'Consultas/consultas.html', data)
 ############################ USUARIOS ##############################################
 
 #VISTA PARA LISTAR USUARIOS

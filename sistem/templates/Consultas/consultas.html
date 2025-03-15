@@ -3,17 +3,17 @@
 {% block title %} | Consultas {% endblock title %}
 
 {% block content %}
-<div class="container">
-    <div class="text-center">
+<div class="text-center">
         <h1>Consultas</h1>
 </div>
 <nav class="navbar bg-body-tertiary">
     <div class="container-fluid">
         <a class="btn btn-primary" href="/agregarconsulta/">Agregar</a>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+        <a class="btn btn-secondary" href="/consultas/">Restablecer</a>
+      <div class="d-flex">
+        <input class="form-control me-2" type="text" placeholder="Buscar paciente" aria-label="Search" name="consulta">
+        <button class="btn btn-outline-success" type="submit" onclick="buscar_consulta()">Buscar</button>
+      </div>
     </div>
   </nav>
     <table class="table table-bordered border-primary">
@@ -33,7 +33,7 @@
                     <td class="tdconsulta">{{ consulta.fechaconsulta }}</td>
                     <td class="tdconsulta">{{ consulta.horaconsulta }}</td>
                     <td class="tdconsulta">{{ consulta.paciente.nombre}}</td>
-                    <td class="tdconsultaobrservaciones">{{ consulta.observaciones }}</td>
+                    <td class="tdconsultaobrservaciones">{{ consulta.observaciones }}</td>  
                     <td class="tdconsulta">{{ consulta.precioconsulta }}</td>
                     <td class="tdconsultaedit">
                         <a class="btn btn-secondary" href="/editarconsulta/{{consulta.idconsulta}}/">Editar</a>
@@ -50,5 +50,23 @@
         </tbody>
     </table>
     {% include "paginacion.html" %}
-</div>
+    {% if mensaje == 1 %}
+    <script>
+        swal({
+			title: "!No encontrado!",
+			text: "No existe ese Paciente",
+			timer: 2000,
+			showConfirmButton: false});
+    </script>
+    {% else %}
+        {% if  mensaje == 2 %}
+        <script>
+            swal({      // ESTA EN PRUEBAAA
+                title: "!Consulta Creada!",
+                text: "",
+                timer: 2000,
+                showConfirmButton: false});
+        </script>
+        {% endif %}
+    {% endif %}
 {% endblock content %}

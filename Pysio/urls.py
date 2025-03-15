@@ -32,11 +32,13 @@ urlpatterns = [
     path('editarpaciente/<int:pk>/', editar_paciente),
     path('eliminarpaciente/<int:pk>/', eliminar_paciente),
     path('historial/<int:pk>/', paciente_historial),
+    path('buscarpaciente/<name>/', buscar_paciente),
     #DIRECCION CONSULTAS
     path('consultas/', ListaConsultas),
     path('agregarconsulta/', crear_consulta),
     path('editarconsulta/<int:pk>/', editar_consulta),
     path('eliminarconsulta/<int:pk>/', eliminar_consulta),
+    path('buscarconsulta/<name>',buscar_consulta),
     #DIRECCION USUARIOS
     path('usuarios/', ListaUsuarios),
     path('agregarusuario/', crear_usuario),

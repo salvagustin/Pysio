@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "jquery-confirm": "^3.3.4"
+    "jquery-confirm": "^3.3.4",
+    "whitenoise": "^0.0.1"
   }
 }

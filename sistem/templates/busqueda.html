@@ -4,20 +4,19 @@
 
 {% block content %}
 <div class="text-center">
-    <h1>Pacientes</h1>
+    <h1>Buscar Paciente</h1>
 </div>
-<nav class="navbar bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="btn btn-primary" href="/agregarpaciente/">Agregar</a>
-        <a class="btn btn-secondary" href="/pacientes/">Restablecer</a>
-      <div class="d-flex" >
-        <input class="form-control me-2" type="text" placeholder="Ingrese un nombre" aria-label="Search" name="nombre">
-        <button class="btn btn-outline-success"  onclick="buscar_paciente()">Buscar</button>
-      </div>
-    </div>
-  </nav>
 
-
+  <div class="w-100 text-center">
+    <form autocomplete="off" id="search-form" method="post">
+        {% csrf_token %}
+        <input type="text" id="search-input" class="p-3 w-50 search mt-4" placeholder="Buscar paciente">
+        <div id="result-box" class="result-card not-visible">
+            
+        </div>
+    </form>
+</div>
+<!--
     <table class="table table-bordered border-primary">
         <thead>
             <th style="width: 500px;" >Nombre</th>
@@ -45,24 +44,41 @@
         </tbody>
     </table>
     {% include "paginacion.html" %}
-
-    {% if mensaje == 1 %}
+-->
     <script>
-        swal({
-			title: "!No encontrado!",
-			text: "No existe ese Paciente",
-			timer: 2000,
-			showConfirmButton: false});
+        const sendSearchData = (pacientes) =>{
+    
+            $.ajax({
+                type: 'POST',
+                url:'{% url="search" %}',
+                data: {
+                    'csrfmiddlewaretoken': csrf,
+                    'pacientes':pacientes,
+                },
+                success: (res) =>{
+    
+                },
+                error:(err) =>{
+                    console.log(err)
+                }
+            })
+    
+        }
+        const search_form = document.getElementById('search-form')
+        const search_input = document.getElementById('search-input')
+        const result_box = document.getElementById('result-box')
+    
+        const csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value
+    
+        search_input.addEventListener('keyup', e=>{
+            console.log(e.target.value);
+    
+            if(result_box.classList.contains('not-visible')){
+                result_box.classList.remove('not-visible')
+            }
+    
+            sendSearchData(e.target.value);
+        })
     </script>
-    {% else %}
-        {% if  mensaje == 2 %}
-        <script>
-            swal({ //EN PRUEBA
-                title: "!Paciente Creado!",
-                text: "",
-                timer: 2000,
-                showConfirmButton: false});
-        </script>
-        {% endif %}
-    {% endif %}
+
 {% endblock content %}
