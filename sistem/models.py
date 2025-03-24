@@ -35,7 +35,7 @@ class Consulta(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, blank=False, null=False)
     fechaconsulta = models.DateField('Fecha de consulta', auto_now=True, auto_now_add=False)
     horaconsulta = models.TimeField('Hora consulta', auto_now=True, auto_now_add=False)
-    precioconsulta = models.DecimalField('Precio', max_digits=10, decimal_places=2, default=0.0, blank=False, null=False)
+    precioconsulta = models.DecimalField('Precio', max_digits=10, decimal_places=2, blank=False, null=False)
     opciones = (("Lesion", "Lesion"), ("Patologia", "Patologia"))
     tipo =  models.CharField('Tipo', max_length=9, choices=opciones, blank=False, null=False)
     observaciones = models.CharField('Observaciones', max_length=500)
@@ -61,7 +61,7 @@ class Cita(models.Model):
     idcita = models.AutoField(primary_key=True)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, blank=False, null=False)
     fechacita = models.DateField('Fecha de cita')
-    opciones = (("1", "8:00 - 9:00"), ("2", "9:00 - 10:00"),("3", "10:00 - 11:00"),("4", "11:00 - 12:00"),
-                ("5", "01:00 - 02:00"),("6", "02:00 - 03:00"),("7", "03:00 - 04:00"),("8", "04:00 - 05:00"),("9", "05:00 - 06:00"))
+    opciones = (("8", "8:00 - 9:00"), ("9", "9:00 - 10:00"),("10", "10:00 - 11:00"),("11", "11:00 - 12:00"),
+                ("13", "01:00 - 02:00"),("14", "02:00 - 03:00"),("15", "03:00 - 04:00"),("16", "04:00 - 05:00"),("17", "05:00 - 06:00"))
     horacita =  models.CharField('Hora cita', max_length=11, choices=opciones, blank=False, null=False)
     observaciones = models.CharField('Observaciones', max_length=500)

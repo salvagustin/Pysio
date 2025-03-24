@@ -1,41 +1,48 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block title %} | Historial {% endblock title %}
 
 {% block content %}
 
 <div class="text-center">
+    <br><br>
     <h1>Historial</h1>
 </div>
-<nav class="navbar bg-body-tertiary">
-    <div class="container-fluid">
-        <h3>Nombre: {{nombre}} </h3>
-        <h3>Total: {{conteo}} </h3>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+<div class="content">
+    <div class="content6">       
+        <h4 name="nombre">Nombre: {{nombre}} </h4>
     </div>
-</nav>
-    <table class="table table-bordered border-primary">
-        <thead>
-            <th class="centrar_texto">Numero</th>
-            <th class="centrar_texto">Fecha</th>
-            <th class="centrar_texto" >Tipo</th>
-            <th class="centrar_texto">Observaciones</th>
-        </thead>
-        <tbody>
-            {% for consulta in entity %}
-                <tr>
-                    <td class="centrar_texto">{{ consulta.idconsulta }}</td>
-                    <td class="centrar_texto">{{ consulta.fechaconsulta }}</td>
-                    <td class="centrar_texto">{{ consulta.tipo }}</td>
-                    <td class="tdconsultaobrservaciones">{{ consulta.observaciones }}</td>
-                    
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% include "paginacion.html" %}
-
+    <div class="content7">
+        <h4>Total: {{conteo}} </h4>
+    </div>
+</div>
+<div class="container">
+    <div class="tbl_container">
+        <table class="tbl">
+            <thead>
+                <th>Numero</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Tipo</th>
+                <th colspan="2">Observaciones</th>
+            </thead>
+            <tbody>
+                {% for consulta in entity %}
+                
+                    <tr>  
+                        <td data-lable="Numero:">{{ consulta.idconsulta }}</td>
+                        <td data-lable="Fecha:">{{ consulta.fechaconsulta }}</td>
+                        <td data-lable="Fecha:">{{ consulta.horaconsulta }}</td>
+                        <td data-lable="Tipo:">{{ consulta.tipo }}</td>
+                        <td data-lable="Obs:">{{ consulta.observaciones|truncatechars:50 }}</td>
+                        <td><a class="btn btn-outline-secondary" onclick="consultadetalles(
+                            detalles = '{{consulta.observaciones}}'
+                        )">Detalles</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% include "paginacion.html" %}
+    </div>
+</div>
 {% endblock content %}

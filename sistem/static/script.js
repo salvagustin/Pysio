@@ -44,7 +44,7 @@ function buscar_paciente(){
 		swal({
 			title: "!Campo vacio!",
 			text: "Seleccione un nombre",
-			timer: 3000,
+			timer: 5000,
 			showConfirmButton: false});
 			
 	}else{
@@ -65,4 +65,13 @@ function buscar_consulta(){
 
 		location.href = "/buscarconsulta/"+ name
 	}	
+}
+
+
+
+function consultadetalles(detalles){
+	swal({
+		title: "Detalles",
+		text:  detalles});
+	
 }

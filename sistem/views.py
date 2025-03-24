@@ -13,6 +13,7 @@ import datetime
 
 #OBTENER FECHA ACTUAL Y FORMATEAR SEMANA Y MES ACTUALES
 horayfecha = datetime.datetime.now()
+horaactual = horayfecha.hour
 semanaactual = horayfecha.isocalendar().week
 anoactual = horayfecha.isocalendar().year
 mesactualnumero = horayfecha.strftime("%m").capitalize()
@@ -29,7 +30,7 @@ def first_day_of_iso_week(year, week):
     return date + days_to_monday + timedelta(weeks=weeks_diff)
 
 
-##### OBTENER NOMBRE DEL MES  
+##### OBTENER NOMBRE DEL MES
 def nombre_mes(mesactualnumero): 
     match mesactualnumero:
             case "01" :
@@ -55,14 +56,59 @@ def nombre_mes(mesactualnumero):
             case "11":
                 mesactual ="Noviembre" 
             case "12":
-                mesactual ="Diciembre" 
+                mesactual ="Diciembre"
+   
     return mesactual
 
 #######################################################################
 # Create your views here.
 @login_required
 def home(request):
-    return render(request, 'index.html' )
+    return render(request, 'base.html' )
+
+@login_required
+def inicio(request):
+
+    citasdiarias = Cita.objects.filter(fechacita=horayfecha).count()
+    proximacita = Cita.objects.filter(fechacita=horayfecha,horacita=8)
+    consultasdiarias = Consulta.objects.filter(fechaconsulta=horayfecha).count()
+    devengadodiario = Consulta.objects.filter(fechaconsulta=horayfecha).aggregate(Sum('precioconsulta')).get('precioconsulta__sum')
+   
+    if devengadodiario == None:
+        devengadodiario=0
+
+    if horaactual > 0 and horaactual < 7:
+        proximacita = Cita.objects.filter(fechacita=horayfecha,horacita=8)
+    elif horaactual > 7:
+        match horaactual:
+            case 8:
+                proximacita = Cita.objects.filter(fechacita=horayfecha,horacita=9)
+            case 9:
+                proximacita = Cita.objects.filter(fechacita=horayfecha,horacita=10)
+            case 10:
+                proximacita = Cita.objects.filter(fechacita=horayfecha,horacita=11)
+            case 11:
+                proximacita = Cita.objects.filter(fechacita=horayfecha,horacita=13)
+            case 12:
+                proximacita = Cita.objects.filter(fechacita=horayfecha,horacita=13)
+            case 13:
+                proximacita = Cita.objects.filter(fechacita=horayfecha,horacita=14)
+            case 14:
+                proximacita = Cita.objects.filter(fechacita=horayfecha,horacita=15)
+            case 15:
+                proximacita = Cita.objects.filter(fechacita=horayfecha,horacita=16)
+            case 16:
+                proximacita = Cita.objects.filter(fechacita=horayfecha,horacita=17)
+    elif horaactual > 17:
+            proximacita = 'Dia terminado'
+
+    data={
+        'proximacita':proximacita,
+        'citashoy':citasdiarias,
+        'consultashoy':consultasdiarias,
+        'devengadohoy':devengadodiario
+    }
+    return render(request, 'index.html',data)
 
 @login_required
 def salir(request):
@@ -91,6 +137,7 @@ def estadisticas(request):
     totalconsultas = Consulta.objects.count()
     mes = nombre_mes(lunes.strftime("%m").capitalize())
     data = {
+        'year':anoactual,
         'devengadomes': devengadomes,
         'consultasmes': consultasmes,
         'mesactual': mes,
@@ -130,7 +177,7 @@ def ListaCitas(request):
     citas1 = []
     citas1.append(1)#AGREGAMOS 1 PARA MOSTRAR LA HORA
     for i in range(2,7):
-        citas_1 = Cita.objects.filter(horacita=1, fechacita__week=semanaactual, fechacita__week_day=i, fechacita__year=anoactual)
+        citas_1 = Cita.objects.filter(horacita=8, fechacita__week=semanaactual, fechacita__week_day=i, fechacita__year=anoactual)
         
         if len(citas_1) == 0:
             citas1.append(2)#AGREGAMOS 2 PARA MOSTRAR DISPONIBILIDAD EN LA CITA
@@ -142,7 +189,7 @@ def ListaCitas(request):
     citas2 = []
     citas2.append(1)#AGREGAMOS 1 PARA MOSTRAR LA HORA
     for i in range(2,7):
-        citas_2 = Cita.objects.filter(horacita=2, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
+        citas_2 = Cita.objects.filter(horacita=9, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
         if len(citas_2) == 0:
             citas2.append(2)#AGREGAMOS 2 PARA MOSTRAR DISPONIBILIDAD EN LA CITA
         else:
@@ -153,7 +200,7 @@ def ListaCitas(request):
     citas3 = []
     citas3.append(1)#AGREGAMOS 1 PARA MOSTRAR LA HORA
     for i in range(2,7):
-        citas_3 = Cita.objects.filter(horacita=3, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
+        citas_3 = Cita.objects.filter(horacita=10, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
         if len(citas_3) == 0:
             citas3.append(2)#AGREGAMOS 2 PARA MOSTRAR DISPONIBILIDAD EN LA CITA
         else:
@@ -164,7 +211,7 @@ def ListaCitas(request):
     citas4 = []
     citas4.append(1)#AGREGAMOS 1 PARA MOSTRAR LA HORA
     for i in range(2,7):
-        citas_4 = Cita.objects.filter(horacita=4, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
+        citas_4 = Cita.objects.filter(horacita=11, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
         if len(citas_4) == 0:
             citas4.append(2)#AGREGAMOS 2 PARA MOSTRAR DISPONIBILIDAD EN LA CITA
         else:
@@ -175,7 +222,7 @@ def ListaCitas(request):
     citas5 = []
     citas5.append(1)#AGREGAMOS 1 PARA MOSTRAR LA HORA
     for i in range(2,7):
-        citas_5 = Cita.objects.filter(horacita=5, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
+        citas_5 = Cita.objects.filter(horacita=13, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
         if len(citas_5) == 0:
             citas5.append(2)#AGREGAMOS 2 PARA MOSTRAR DISPONIBILIDAD EN LA CITA
         else:
@@ -186,7 +233,7 @@ def ListaCitas(request):
     citas6 = []
     citas6.append(1)#AGREGAMOS 1 PARA MOSTRAR LA HORA
     for i in range(2,7):
-        citas_6 = Cita.objects.filter(horacita=6, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
+        citas_6 = Cita.objects.filter(horacita=14, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
         if len(citas_6) == 0:
             citas6.append(2)#AGREGAMOS 2 PARA MOSTRAR DISPONIBILIDAD EN LA CITA
         else:
@@ -197,7 +244,7 @@ def ListaCitas(request):
     citas7 = []
     citas7.append(1)#AGREGAMOS 1 PARA MOSTRAR LA HORA
     for i in range(2,7):
-        citas_7 = Cita.objects.filter(horacita=7, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
+        citas_7 = Cita.objects.filter(horacita=15, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
         if len(citas_7) == 0:
             citas7.append(2)#AGREGAMOS 2 PARA MOSTRAR DISPONIBILIDAD EN LA CITA
         else:
@@ -208,7 +255,7 @@ def ListaCitas(request):
     citas8 = []
     citas8.append(1)#AGREGAMOS 1 PARA MOSTRAR LA HORA
     for i in range(2,7):
-        citas_8 = Cita.objects.filter(horacita=8, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
+        citas_8 = Cita.objects.filter(horacita=16, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
         if len(citas_8) == 0:
             citas8.append(2)#AGREGAMOS 2 PARA MOSTRAR DISPONIBILIDAD EN LA CITA
         else:
@@ -219,7 +266,7 @@ def ListaCitas(request):
     citas9 = []
     citas9.append(1)#AGREGAMOS 1 PARA MOSTRAR LA HORA
     for i in range(2,7):
-        citas_9 = Cita.objects.filter(horacita=9, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
+        citas_9 = Cita.objects.filter(horacita=17, fechacita__week=semanaactual, fechacita__week_day=i,fechacita__year=anoactual)
         if len(citas_9) == 0:
             citas9.append(2)#AGREGAMOS 2 PARA MOSTRAR DISPONIBILIDAD EN LA CITA
         else:
@@ -572,7 +619,7 @@ def paciente_historial(request,pk=None):
     consultas = Consulta.objects.filter(paciente__idpaciente=pk).order_by('-fechaconsulta')
     pagina = request.GET.get("page", 1)
     try:
-        paginator = Paginator(consultas, 10)
+        paginator = Paginator(consultas, 15)
         consultas = paginator.page(pagina)
     except:
         raise Http404
@@ -708,6 +755,7 @@ def eliminar_consulta(request, pk=None):
     return redirect('/consultas/')
 
 #VISTA PARA BUSCAR CONSULTA
+@login_required
 def buscar_consulta(request, name=None):
     allconsultas = Consulta.objects.all().order_by('fechaconsulta')
     consultas = Consulta.objects.filter(paciente__nombre__icontains=name)

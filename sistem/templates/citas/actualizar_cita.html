@@ -1,4 +1,4 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block title %} | Registro de Cita {% endblock title %}
 {% block extrahead %}
@@ -6,9 +6,12 @@
 {% endblock %}
 
 {% block content %}
+<br><br>
 <div class="container">
     <div class="text-center">
+        <br><br>
         <h1>Editar cita</h1>
+        
     </div>
 </div>
 <br>
@@ -17,9 +20,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <h5>Numero: {{ cita.idcita }}</h4>
                 <div class="card-header">
-
+                    <h5>Numero: {{ cita.idcita }}</h4>
                 </div>
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data">
@@ -27,7 +29,7 @@
 
                         {{ citaform |crispy}}
                        
-                        <div class="container1">
+                        <div class="content">
                             <button type="submit" class="btn btn-primary">Guardar</button>
                             <a class="btn btn-secondary" href="/citas/">Cancelar</a>
                             <button type="button" class="btn btn-danger" onclick="eliminarregistro(
